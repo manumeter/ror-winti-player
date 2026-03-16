@@ -1,0 +1,11 @@
+--- node_modules/beatbox.js/dist/beatbox.js	2025-09-24 13:15:42.279686915 +0200
++++ node_modules/beatbox.js/dist/beatbox.js.new	2025-09-24 14:28:19.756481658 +0200
+@@ -254,8 +254,6 @@
+           const instr = _Beatbox._resolveInstrument(part[strokeIdx]);
+           if (instr && (instr.volume == null || instr.volume > 0)) {
+             let time = this._referenceTime + (this._position - this._upbeat) * this._strokeLength / 1e3;
+-            if (this._lastInstrumentStrokes[instr.key])
+-              this._lastInstrumentStrokes[instr.key].stop(time);
+             const sound = this._scheduleSound(instr, time);
+             this._lastInstrumentStrokes[instr.key] = sound;
+           }

@@ -14,11 +14,10 @@ RUN git clone https://github.com/beatboxjs/ror-player.git . && \
 
 COPY ./patches /tmp/patches
 
-#RUN git apply -v /tmp/patches/*.patch && \
-#    rm -rf /player/assets/tuneDescriptions/* /player/assets/audio/* /player/assets/i18n/* && \
-#    npm install && \
-#    for i in /tmp/patches/*.diff; do patch -p0 < $i; done
-RUN npm install
+RUN git apply -v /tmp/patches/*.patch && \
+    rm -rf /player/assets/tuneDescriptions/* /player/assets/audio/* /player/assets/i18n/* && \
+    npm install && \
+    for i in /tmp/patches/*.diff; do patch -p0 < $i; done
 
 #COPY ./descriptions /player/assets/tuneDescriptions
 #COPY ./audio /player/assets/audio
