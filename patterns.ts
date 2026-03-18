@@ -56,6 +56,26 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 				ag: '@ls',
 				sh: '@ls'
 			},
+			'Clave Inverted': {
+				ls: '  X X   X  X  X ',
+				ms: '@ls',
+				hs: '@ls',
+				re: '@ls',
+				sn: '@ls',
+				ta: '@ls',
+				ag: '@ls',
+				sh: '@ls'
+			},
+			'Boom Break': {
+				ls: 'X               ',
+				ms: '@ls',
+				hs: '@ls',
+				re: '@ls',
+				sn: '@ls',
+				ta: '@ls',
+				ag: '@ls',
+				sh: '@ls'
+			},
 			"Whistle in": {
 				ot: 'y   y   y   y   '
 			}
@@ -140,7 +160,7 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 		},
 		exampleSong: [ "Tune", "Tune", /*"Break 1", "Tune", "Tune",*/ "Break 2", "Tune", "Tune" ]
 	},
-	/*'Ragga': {
+	'Ragga': {
 		categories: [ "common", "tricky" ],
 		sheet: sheetUrl + "ragga.pdf",
 		descriptionFilename: "ragga",
@@ -157,6 +177,17 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 				ag: 'o a o a oa ao a o a  oooo a o   ',
 				sh: 'X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.'
 			},
+			"Tune (einfacher)": {
+				loop: true,
+				ls: 'X  X  X X  X  X X  X  X X  X  X ',
+				ms: 'X  X  X X  X  X X  X  X X  X  X ',
+				hs: 'X     X X     X X     X X     X ',
+				re: '  X   X   X   X   X   X  XXX  X ',
+				sn: '..XX..X...XX..X...XX..X...XX..X.',
+				ta: '  X   X   X   X   X   X   XX  X ',
+				ag: 'o a o a oa ao a o a  oooo a o   ',
+				sh: 'X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.'
+			},
 			'Kick Back 1': {
 				loop: true,
 				ls: 'X  X    X  X    X  X    X  X    ',
@@ -166,17 +197,6 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 				sn: '@re',
 				ta: '@re',
 				ag: '@re',
-				sh: '@re'
-			},
-			'Kick Back 2': {
-				loop: true,
-				ls: 'X  X X  X  X X  X  X X  X  X X  ',
-				ms: '@ls',
-				hs: '@ls',
-				re: '  X   X   X   X   X   X   X   X ',
-				sn: '@re',
-				ta: '@re',
-				ag: 'oaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa',
 				sh: '@re'
 			},
 			'Break 2': {
@@ -211,8 +231,8 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 				sh: 'X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.'
 			}
 		},
-		exampleSong: [ "Tune", "Tune", "Break 2", "Tune", "Tune", "Break 3", "Tune", "Tune", "Kick Back 1", "Kick Back 1", "Kick Back 2", "Kick Back 2", "Tune", "Tune", "Zorro-Break", "Zorro-Break", "Tune", "Tune" ]
-	},*/
+		exampleSong: [ "Tune", "Tune", "Break 2", "Tune", "Tune", "Break 3", "Tune", "Tune", "Kick Back 1", "Kick Back 1", "Tune", "Tune", "Zorro-Break", "Zorro-Break", "Tune", "Tune" ]
+	},
 	'Samba Reggae': {
 		categories: [ "common", "medium", "cultural-appropriation" ],
 		sheet: sheetUrl + "samba-reggae.pdf",
