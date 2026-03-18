@@ -182,9 +182,9 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 				ls: 'X  X  X X  X  X X  X  X X  X  X ',
 				ms: 'X  X  X X  X  X X  X  X X  X  X ',
 				hs: 'X     X X     X X     X X     X ',
-				re: '  X   X   X   X   X   X  XXX  X ',
+				re: '  X   X   X   X   X   X   X   X ',
 				sn: '..XX..X...XX..X...XX..X...XX..X.',
-				ta: '  X   X   X   X   X   X   XX  X ',
+				ta: '  X   X   X   X   X   X   X   X ',
 				ag: 'o a o a oa ao a o a  oooo a o   ',
 				sh: 'X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.'
 			},
