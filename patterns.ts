@@ -66,6 +66,9 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 				ag: '@ls',
 				sh: '@ls'
 			},
+			'4 Silence': {
+				ls: repeat(16, ' ')
+			},
 			'Boom Break': {
 				ls: 'X               ',
 				ms: '@ls',
