@@ -1,4 +1,4 @@
-# Borumbaia Player
+# RoR Winti Player
 
 This is a fork of RoR-Player with some customizations and a reduced
 set of Rhythms.
