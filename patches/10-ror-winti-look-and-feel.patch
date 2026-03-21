@@ -1,0 +1,32 @@
+diff --git a/index.html b/index.html
+index 3f1376b..b50f657 100644
+--- a/index.html
++++ b/index.html
+@@ -4,7 +4,7 @@
+ 		<meta charset="utf-8" />
+ 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+-		<title>RoR Player</title>
++		<title>RoR Winti Player</title>
+ 		<meta name="description" content="A pattern-based drumming machine.">
+ 		<link rel="icon" href="./favicon.svg">
+ 		<link rel="mask-icon" href="./favicon.svg" color="#d479c6">
+diff --git a/src/bootstrap.scss b/src/bootstrap.scss
+index 9248b4d..1d64e4c 100644
+--- a/src/bootstrap.scss
++++ b/src/bootstrap.scss
+@@ -2,6 +2,7 @@ $btn-transition: color .15s ease-in-out, border-color .15s ease-in-out, box-shad
+ $enable-shadows: true;
+ $enable-gradients: true;
+ 
++$primary: #b969ac;
+ $secondary: #fff;
+ 
+ 
+@@ -138,4 +139,4 @@ h3:not(.popover-header) {
+ 
+ /* .modal-footer button + button {
+ 	margin-left: 0.25rem;
+-} */
+\ No newline at end of file
++} */

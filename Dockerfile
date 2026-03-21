@@ -32,3 +32,4 @@ RUN npm run build
 FROM nginx:stable-alpine AS production
 
 COPY --from=build /player/dist /usr/share/nginx/html/
+COPY ./www /usr/share/nginx/html/
