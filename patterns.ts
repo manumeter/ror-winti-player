@@ -66,6 +66,16 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 				ag: '@ls',
 				sh: '@ls'
 			},
+			'Progressive': {
+				ls: 'X   X   X   X   X X X X X X X X XXXXXXXXXXXXXXXX',
+				ms: '@ls',
+				hs: '@ls',
+				re: '@ls',
+				sn: '@ls',
+				ta: '@ls',
+				ag: '@ls',
+				sh: '@ls'
+			},
 			'4 Silence': {
 				ls: repeat(16, ' ')
 			},
@@ -95,17 +105,6 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 				ms: "@ls",
 				hs: "@ls",
 				re: "r X r X r X r X r X r X r XXr X ",
-				sn: "....X.......X.......X.......X...",
-				ta: "X  X  X  X        XX            ",
-				ag: "o  a  a o  a  a o  a  a o   a   ",
-				sh: "................................"
-			},
-			"Tune (einfacher)": {
-				loop: true,
-				ls: "X   X   X   X   X   X   X   X   ",
-				ms: "@ls",
-				hs: "@ls",
-				re: "r X r X r X r X r X r X r X r X ",
 				sn: "....X.......X.......X.......X...",
 				ta: "X  X  X           XX            ",
 				ag: "o  a  a o  a  a o  a  a o   a   ",
@@ -144,18 +143,7 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 				ls: 'X  X  X X X     X  X  X X       ',
 				ms: '@ls',
 				hs: '@ls',
-				re: 'f  hf  hf  hf  hf  hf  hf  hXhrh',
-				sn: '....X.......X.......X.......X...',
-				ta: '    X       X X     X     X X   ',
-				ag: 'o  a  o   a a a o  a  o   a a a ',
-				sh: 'X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.'
-			},
-			"Tune (einfacher)": {
-				loop: true,
-				ls: 'X  X  X X X     X  X  X X       ',
-				ms: '@ls',
-				hs: '@ls',
-				re: 'X  hX  hX  hX  hX  hX  hX  hX  h',
+				re: 'X  hX  hX  hX  hX  hX  hX  hX r ',
 				sn: '....X.......X.......X.......X...',
 				ta: '    X       X X     X     X X   ',
 				ag: 'o  a  o   a a a o  a  o   a a a ',
@@ -174,6 +162,36 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 		},
 		exampleSong: [ "Tune", "Tune", /*"Break 1", "Tune", "Tune",*/ "Break 2", "Tune", "Tune" ]
 	},
+	'Karla Shnikov': {
+		categories: [ "common", "onesurdo", "easy" ],
+		sheet: sheetUrl + "karla-shnikov.pdf",
+		descriptionFilename: "karla-shnikov",
+		video: "https://tube.rhythms-of-resistance.org/videos/embed/cc4d0222-3713-4943-bba1-cc733cb84ccc",
+		patterns: {
+			Tune: {
+				loop: true,
+				ls: 'X   0 XX    0   X   0 XX    0   X   0 XX    0   X   0 XX X XX X ',
+				ms: '@ls',
+				hs: '@ls',
+				re: 'X  XX  X X XX X X  XX  X X XX X X  XX  X X XX X X  XX  X X XX X ',
+				sn: '....X.......X.......X.......X.......X.......X.......X.......X...',
+				ta: '    X       X       X  X X XX       X       X       X  X X XX   ',
+				ag: 'o  oa o o  oa o o  oa o o  oa o o  oa o o  oa o o  oa o o  oa o ',
+				sh: '................................................................'
+			},
+			'Break 2': {
+				ls: 'XXXXXXXXXXXXXXXXX   X   X   X   X X    X X      X X    X X      ',
+				ms: '@ls',
+				hs: '@ls',
+				re: 'XXXXXXXXXXXXXXXXX   X   X   X       X      XXXX     X      XXXX ',
+				sn: '@re',
+				ta: '@re',
+				ag: '@re',
+				sh: '@re'
+			}
+		},
+		exampleSong: [ "Tune", "Break 2", "Tune"/*, "Break 2 Inverted", "Tune"*/ ]
+	},
 	'Ragga': {
 		categories: [ "common", "tricky" ],
 		sheet: sheetUrl + "ragga.pdf",
@@ -182,23 +200,12 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 		patterns: {
 			Tune: {
 				loop: true,
-				ls: 'X  X  0 X  X  0 X  X  0 X  X  0 ',
-				ms: '0  X  X 0  X  X 0  X  X 0  X  X ',
-				hs: '0     X 0     X 0     X 0     X ',
-				re: '  X   X   X   X   X   X  XXX  X ',
-				sn: '..XX..X...XX..X...XX..X...XX..X.',
-				ta: '  X   X   X   X   X   X   XX  X ',
-				ag: 'o a o a oa ao a o a  oooo a o   ',
-				sh: 'X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.'
-			},
-			"Tune (einfacher)": {
-				loop: true,
 				ls: 'X  X  X X  X  X X  X  X X  X  X ',
 				ms: 'X  X  X X  X  X X  X  X X  X  X ',
 				hs: 'X     X X     X X     X X     X ',
-				re: '  X   X   X   X   X   X   X   X ',
+				re: '  X   X   X   X   X   X  XXX  X ',
 				sn: '..XX..X...XX..X...XX..X...XX..X.',
-				ta: '  X   X   X   X   X   X   X   X ',
+				ta: '  X   X   X   X   X   X   XX  X ',
 				ag: 'o a o a oa ao a o a  oooo a o   ',
 				sh: 'X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.'
 			},
@@ -254,21 +261,10 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 		patterns: {
 			Tune: {
 				loop: true,
-				ls: '0   X   0   X X ',
-				ms: 'X   0   X   0   ',
-				hs: '0     X 0   XXXX',
-				re: '  XX  XX  XX  XX',
-				sn: 'X..X..X...X..X..',
-				ta: 'X  X  X   X X   ',
-				ag: 'o a a oo a aa o ',
-				sh: '................'
-			},
-			"Tune (einfacher)": {
-				loop: true,
-				ls: '    X       X   ',
+				ls: '    X       X X ',
 				ms: 'X       X       ',
-				hs: 'X     X X   X   ',
-				re: '  X   X   X   X ',
+				hs: 'X     X X   XXXX',
+				re: '..XX..XX..XX..XX',
 				sn: 'X..X..X...X..X..',
 				ta: 'X  X  X   X X   ',
 				ag: 'o a a oo a aa o ',
