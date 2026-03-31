@@ -100,6 +100,17 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 				ag: "o  a  a o  a  a o  a  a o   a   ",
 				sh: "................................"
 			},
+			"Tune (einfacher)": {
+				loop: true,
+				ls: "X   X   X   X   X   X   X   X   ",
+				ms: "@ls",
+				hs: "@ls",
+				re: "r X r X r X r X r X r X r X r X ",
+				sn: "....X.......X.......X.......X...",
+				ta: "X  X  X           XX            ",
+				ag: "o  a  a o  a  a o  a  a o   a   ",
+				sh: "................................"
+			},
 			"Break 1": {
 				ls: "X       X  X  X ",
 				ms: "@ls",
