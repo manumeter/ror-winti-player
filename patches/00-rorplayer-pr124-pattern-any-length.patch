@@ -1,0 +1,252 @@
+diff --git a/src/config.ts b/src/config.ts
+index bf4a978..e7e09c6 100644
+--- a/src/config.ts
++++ b/src/config.ts
+@@ -40,15 +40,15 @@ export type Config = {
+ 	}>;
+ 
+ 	/**
+-	 * The available time signatures. The key is the number of strokes per beat (the number of beats per bar is fixed to 4), the value is
+-	 * the name of the time measurement as it should be shown in the UI.
++	 * The available time signatures. The key is the number of strokes per beat, the value is the name of the time measurement as it should be
++     * shown in the UI.
+ 	 */
+ 	times: Record<number, () => string>;
+ 
+ 	/**
+-	 * The stroke resolution that will be used throughout the app, in number of strokes per beat (the number of beats per bar is fixed to 4).
+-	 * This has to be the least common multiple of the available time signatures. For example, to allow for both rhythms that use 4 strokes
+-	 * per beat and rhythms that use 3 strokes per beat, the stroke resolution needs to be 12 (or a multiple thereof).
++	 * The stroke resolution that will be used throughout the app, in number of strokes per beat. This has to be the least common multiple of
++     * the available time signatures. For example, to allow for both rhythms that use 4 strokes per beat and rhythms that use 3 strokes per
++     * beat, the stroke resolution needs to be 12 (or a multiple thereof).
+ 	 */
+ 	playTime: number;
+ 
+diff --git a/src/services/player.ts b/src/services/player.ts
+index e536fc5..ee5a825 100644
+--- a/src/services/player.ts
++++ b/src/services/player.ts
+@@ -130,7 +130,7 @@ export function patternToBeatbox(pattern: Pattern, playbackSettings: PlaybackSet
+ export function songToBeatbox(song: SongParts, state: State, playbackSettings: PlaybackSettings): RawPatternWithUpbeat {
+ 	const length = getEffectiveSongLength(song, state);
+ 	let maxUpbeat = config.playTime*4;
+-	let ret: RawPattern = new Array(maxUpbeat + length*config.playTime*4);
++	let ret: RawPattern = new Array(maxUpbeat + length*config.playTime);
+ 	let upbeat = 0;
+ 
+ 	function insertPattern(idx: number, pattern: Pattern, instrumentKey: Instrument, patternLength: number, whistle: Whistle) {
+@@ -143,8 +143,8 @@ export function songToBeatbox(song: SongParts, state: State, playbackSettings: P
+ 
+ 		let upbeatHasStarted = false;
+ 		let idxOffset = pattern.upbeat * config.playTime / pattern.time;
+-		idx = idx*config.playTime*4;
+-		for(let i = 0; i<(patternLength*config.playTime*4 + idxOffset); i++) {
++		idx = idx*config.playTime;
++		for(let i = 0; i<(patternLength*config.playTime + idxOffset); i++) {
+ 			if((patternBeatbox[i] || []).length > 0)
+ 				upbeatHasStarted = true;
+ 
+@@ -164,7 +164,7 @@ export function songToBeatbox(song: SongParts, state: State, playbackSettings: P
+ 				const pattern = patternReference && getPatternFromState(state, patternReference);
+ 				if(pattern) {
+ 					let patternLength = 1;
+-					for(let j=i+1; j<i+pattern.length/4 && (!song[j] || !song[j][inst]); j++) // Check if pattern is cut off
++					for(let j=i+1; j<i+pattern.length && (!song[j] || !song[j][inst]); j++) // Check if pattern is cut off
+ 						patternLength++;
+ 
+ 					insertPattern(i, pattern, inst, patternLength, false);
+@@ -195,4 +195,4 @@ export function stopAllPlayers(): void {
+ 
+ export function getPlayerById(id: number): Beatbox {
+ 	return players[id] || null;
+-}
+\ No newline at end of file
++}
+diff --git a/src/state/song.ts b/src/state/song.ts
+index ac0ea3c..373b54d 100644
+--- a/src/state/song.ts
++++ b/src/state/song.ts
+@@ -81,7 +81,7 @@ export function getEffectiveSongLength(song: SongParts, state: State): number {
+ 		const ref = song[maxIndex][instr];
+ 		const pattern = ref && getPatternFromState(state, ref);
+ 		if(pattern)
+-			length = Math.max(length, pattern.length/4);
++			length = Math.max(length, pattern.length);
+ 	}
+ 	return maxIndex + length;
+ }
+@@ -279,4 +279,4 @@ export function allInstruments(patternReference: PatternReference, instruments =
+ 		result[instr] = patternReference;
+ 	}
+ 	return result;
+-}
+\ No newline at end of file
++}
+diff --git a/src/ui/compose/song-player.vue b/src/ui/compose/song-player.vue
+index 6dbb515..1187518 100644
+--- a/src/ui/compose/song-player.vue
++++ b/src/ui/compose/song-player.vue
+@@ -86,11 +86,10 @@
+ 	const length = computed(() => {
+ 		let length = getEffectiveSongLength(song.value, state.value);
+ 		if(isDraggingPattern.value)
+-			length++;
++			length = length+4;
+ 		if(dragOver.value && typeof dragOver.value === 'object')
+-			length = Math.max(length, dragOver.value.idx+2);
+-		length = Math.max(4, length);
+-		return length;
++			length = Math.max(length, dragOver.value.idx+8);
++		return Math.max(16, length);
+ 	});
+ 
+ 	const getColSpan = (instrumentKey: Instrument, i: number) => {
+@@ -103,7 +102,7 @@
+ 			return 1;
+ 
+ 		let ret = 1;
+-		while(ret<(pattern.length/4)) {
++		while(ret<(pattern.length)) {
+ 			if(song.value[i+ret] && song.value[i+ret][instrumentKey])
+ 				break;
+ 
+@@ -279,7 +278,7 @@
+ 			deleteSongPart(song.value, idx, config.instrumentKeys[instrIdx+i]);
+ 		}
+ 
+-		const patternLength = Math.ceil((getPatternFromState(state.value, tuneAndPattern) as Pattern).length / 4);
++		const patternLength = (getPatternFromState(state.value, tuneAndPattern) as Pattern).length;
+ 		for(const part of getAffectedResizePatternRange(instr, idx, dragOver.value.instr as Instrument, dragOver.value.idx, patternLength)) {
+ 			dropPattern(tuneAndPattern, part[0], part[1]);
+ 		}
+@@ -345,7 +344,7 @@
+ 				<div class="field all-drop"></div>
+ 			</div><div class="song-container"><div class="bb-col song" v-for="i in length" :key="i">
+ 				<div class="timeline">
+-					<span v-for="i2 in 4" :key="i2" class="beat" :class="'beat-i-'+((i-1)*4+i2-1)" @click="setPosition((i-1)*4+i2-1, $event)">{{(i-1)*4+i2}}</span>
++					<span class="beat" :class="'beat-i-'+(i-1)" @click="setPosition(i-1, $event)">{{i}}</span>
+ 				</div>
+ 				<div
+ 					:class="`field song-field-${instrumentKey}-${i-1} ${getDragOverClass({ instr: instrumentKey, idx: i-1 })}`"
+@@ -495,7 +494,7 @@
+ 				vertical-align: top;
+ 
+ 				&.song {
+-					width: 10em;
++					width: 2.5em;
+ 
+ 					.field {
+ 						padding: .2em .5em;
+@@ -504,11 +503,12 @@
+ 							position: relative;
+ 						}
+ 
+-						@for $i from 1 through 20 {
++						@for $i from 1 through 200 {
+ 							.pattern-container.colspan-#{$i} {
+-								width: 10em * $i - 1em;
++								width: 2.5em * $i - 1em;
+ 							}
+-
++						}
++						@for $i from 1 through 20 {
+ 							.pattern-container.rowspan-#{$i} {
+ 								height: 3.4em * $i - .4em;
+ 							}
+@@ -548,8 +548,12 @@
+ 					padding-right: 5px;
+ 				}
+ 
+-				&.instrument-actions,&.song {
+-					border-right: 1px solid #888;
++                &.song {
++					border-right: 1px solid #ddd;
++				}
++
++				&.instrument-actions,&.song:nth-child(4n) {
++					border-right: 2px solid #888;
+ 				}
+ 
+ 				&.instruments .field,&.instrument-actions .field {
+@@ -571,7 +575,7 @@
+ 				}
+ 
+ 				.beat {
+-					width: 25%;
++                    width: 100%;
+ 					cursor: pointer;
+ 					display: inline-block;
+ 					padding: 0 .5ex;
+@@ -603,4 +607,4 @@
+ 			padding: 0;
+ 		}
+ 	}
+-</style>
+\ No newline at end of file
++</style>
+diff --git a/src/ui/listen/example-song-player.vue b/src/ui/listen/example-song-player.vue
+index 42289b2..2ec45c8 100644
+--- a/src/ui/listen/example-song-player.vue
++++ b/src/ui/listen/example-song-player.vue
+@@ -53,13 +53,13 @@
+ 	}));
+ 
+ 	const songParts = computed((): SongParts => {
+-		let i = 1;
++		let i = 4;
+ 		const result = {
+ 			0: allInstruments([ "General Breaks", "Whistle in" ])
+ 		} as SongParts;
+ 		for(const part of normalizedSong.value) {
+ 			result[i] = allInstruments([ part.tuneName, part.patternName ], part.instruments);
+-			i += part.length / 4;
++			i += part.length;
+ 		}
+ 		return result;
+ 	});
+@@ -78,7 +78,7 @@
+ 	};
+ 
+ 	const setPosition = ($event: MouseEvent) => {
+-		const length = 4 * getEffectiveSongLength(songParts.value, state.value);
++		const length = getEffectiveSongLength(songParts.value, state.value);
+ 		const el = songRef.value!;
+ 		const rect = el.getBoundingClientRect();
+ 		const percent = (el.scrollLeft + $event.clientX - rect.left) / el.scrollWidth;
+@@ -180,4 +180,4 @@
+ 			}
+ 		}
+ 	}
+-</style>
+\ No newline at end of file
++</style>
+diff --git a/src/ui/pattern-player/pattern-length-picker.vue b/src/ui/pattern-player/pattern-length-picker.vue
+index ad06457..1608b8a 100644
+--- a/src/ui/pattern-player/pattern-length-picker.vue
++++ b/src/ui/pattern-player/pattern-length-picker.vue
+@@ -18,13 +18,21 @@
+ 	const handleUpdate = (value: Value) => {
+ 		emit("update:modelValue", value);
+ 	};
++
++	const lengths = Array.from({ length: 64 }, (_, i) => i + 1);
+ </script>
+ 
+ <template>
+ 	<div class="dropdown">
+ 		<button class="btn btn-secondary dropdown-toggle" :class="props.buttonClass" data-bs-toggle="dropdown">{{i18n.t("pattern-length-picker.length", { length: props.modelValue })}}</button>
+ 		<ul class="dropdown-menu">
+-			<li v-for="le in [ 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64 ]" :key="le"><a class="dropdown-item" :class="{ active: props.modelValue === le }" href="javascript:" @click="handleUpdate(le)" draggable="false">{{i18n.t("pattern-length-picker.length", { length: le })}}</a></li>
++			<li v-for="le in lengths" :key="le"><a class="dropdown-item" :class="{ active: props.modelValue === le, 'highlight': le % 4 === 0 }" href="javascript:" @click="handleUpdate(le)" draggable="false">{{i18n.t("pattern-length-picker.length", { length: le })}}</a></li>
+ 		</ul>
+ 	</div>
+-</template>
+\ No newline at end of file
++</template>
++
++<style scoped>
++.highlight {
++    font-weight: bold;
++}
++</style>

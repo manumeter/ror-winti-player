@@ -22,7 +22,7 @@ RUN git apply -v /tmp/patches/*.patch && \
 #COPY ./descriptions /player/assets/tuneDescriptions
 #COPY ./audio /player/assets/audio
 #COPY ./i18n /player/assets/i18n
-#COPY ./config.ts /player/src/config.ts
+COPY ./config.ts /player/src/config.ts
 COPY ./patterns.ts /player/src/defaultTunes.ts
 
 #RUN ( cd /player/assets/audio; for i in *.mp3; do A=${i%.mp3}; mv "$i" "${A%_*}_$(echo -n ${A##*_} | xxd -p).mp3"; done ) && \
