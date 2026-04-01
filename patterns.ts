@@ -46,6 +46,17 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 		sheet: sheetUrl + "breaks.pdf",
 		video: "https://tube.rhythms-of-resistance.org/videos/embed/37596e72-e93b-44f1-8770-760be8e5ce87",
 		patterns: {
+			"Karla Break": {
+				ls: 'X X X X X X X X X X X X X X X X X X X X X X X X X               ',
+				ms: '@ls',
+				hs: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX               ',
+				re: '@hs',
+				sn: '@hs',
+				ta: '@ls',
+				ag: '@ls',
+				sh: '@ls',
+				volumeHack: { 0: .1, 16: .4, 32: .7, 48: 1  }
+			},
 			"Clave": {
 				ls: 'X  X  X   X X   ',
 				ms: '@ls',
@@ -67,11 +78,11 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 				sh: '@ls'
 			},
 			'Progressive': {
-				ls: 'X   X   X   X   X X X X X X X X XXXXXXXXXXXXXXXX',
+				ls: 'X   X   X   X   X X X X X X X X X X X X X X X X ',
 				ms: '@ls',
-				hs: '@ls',
-				re: '@ls',
-				sn: '@ls',
+				hs: 'X   X   X   X   X X X X X X X X XXXXXXXXXXXXXXXX',
+				re: '@hs',
+				sn: '@hs',
 				ta: '@ls',
 				ag: '@ls',
 				sh: '@ls'
@@ -179,9 +190,9 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 		patterns: {
 			Tune: {
 				loop: true,
-				ls: 'X   0 XX    0   X   0 XX    0   X   0 XX    0   X   0 XX X XX X ',
+				ls: 'X   X       X   X   X       X   X   X       X   X   X       X X ',
 				ms: '@ls',
-				hs: '@ls',
+				hs: 'X   0 XX    0   X   0 XX    0   X   0 XX    0   X   0 XX X XX X ',
 				re: 'X  XX  X X XX X X  XX  X X XX X X  XX  X X XX X X  XX  X X XX X ',
 				sn: '....X.......X.......X.......X.......X.......X.......X.......X...',
 				ta: '    X       X       X  X X XX       X       X       X  X X XX   ',
@@ -189,14 +200,14 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 				sh: '................................................................'
 			},
 			'Break 2': {
-				ls: 'XXXXXXXXXXXXXXXXX   X   X   X   X X    X X      X X    X X      ',
+				ls: 'X X X X X X X X X   X   X   X   X X    X X      X X    X X      ',
 				ms: '@ls',
-				hs: '@ls',
+				hs: 'XXXXXXXXXXXXXXXXX   X   X   X   X X    X X      X X    X X      ',
 				re: 'XXXXXXXXXXXXXXXXX   X   X   X       X      XXXX     X      XXXX ',
 				sn: '@re',
-				ta: '@re',
-				ag: '@re',
-				sh: '@re'
+				ta: 'X X X X X X X X X   X   X   X       X      XXXX     X      XXXX ',
+				ag: '@ta',
+				sh: '@ta'
 			}
 		},
 		exampleSong: [ "Tune", "Break 2", "Tune"/*, "Break 2 Inverted", "Tune"*/ ]

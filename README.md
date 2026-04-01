@@ -1,7 +1,7 @@
 # RoR Winti Player
 
 This is a fork of RoR-Player with some customizations and a reduced
-set of Rhythms.
+and simplified set of Rhythms.
 
 Pushes to this repository will be built and published automatically
 (with a delay of a couple of minutes) at:
