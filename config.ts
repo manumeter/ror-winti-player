@@ -246,14 +246,14 @@ const config: Config = {
 		"Defaults": {
 			displayName: () => getI18n().t("config.stroke-volume-defaults"),
 			volumes: {
-				ls: 0.7,
-				ms: 0.7,
-				hs: 0.7,
-				re: 1.6,
-				sn: 1.2,
-				ta: 1.4,
-				ag: 1,
-				sh: 0.5,
+				ls: 0.8,
+				ms: 0.8,
+				hs: 0.8,
+				re: 1.2,
+				sn: 0.9,
+				ta: 1.0,
+				ag: 0.4,
+				sh: 0.4,
 				ot: 1
 			}
 		},
@@ -266,7 +266,7 @@ const config: Config = {
 				re: 1.5,
 				sn: 1.3,
 				ta: 1.2,
-				ag: 1,
+				ag: 0.5,
 				sh: 0.45,
 				ot: 1
 			}
