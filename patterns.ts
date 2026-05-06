@@ -190,7 +190,7 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 		patterns: {
 			Tune: {
 				loop: true,
-				ls: 'X   X       X   X   X       X   X   X       X   X   X       X X ',
+				ls: "X   0       0   X   0       0   X   0       0   X   0       X X",
 				ms: '@ls',
 				hs: 'X   0 XX    0   X   0 XX    0   X   0 XX    0   X   0 XX X XX X ',
 				re: 'X  XX  X X XX X X  XX  X X XX X X  XX  X X XX X X  XX  X X XX X ',
