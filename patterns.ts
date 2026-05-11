@@ -57,17 +57,16 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 				sh: '@ls',
 				volumeHack: { 0: .1, 16: .4, 32: .7, 48: 1  }
 			},
-			"Wolf Break": {
-				ls: "X X   XXX X    XX X    XX X     X X   XXX X     X X X X X",
+			"Wulf Break": {
+				ls: 'X X   XXX X    XX X    XX X     X X   XXX X    XX X X X X       ',
 				ms: '@ls',
 				hs: '@ls',
-				re: "    X       X       X       X       X       X   X X X X X",
+				re: '    X       X       X       X       X       X  XX X X X X       ',
 				sn: '@re',
 				ta: '@re',
 				ag: '@re',
 				sh: '@re',
-				ot: "                                                           )(",
-				length: 16
+				ot: '                                                          E D   '
 			},
 			"Clave": {
 				ls: 'X  X  X   X X   ',
