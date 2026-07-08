@@ -47,14 +47,14 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 		video: "https://tube.rhythms-of-resistance.org/videos/embed/37596e72-e93b-44f1-8770-760be8e5ce87",
 		patterns: {
 			"Karla Break": {
-				ls: 'X X X X X X X X X X X X X X X X X X X X X X X X X               ',
+				ls: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX               ',
 				ms: '@ls',
-				hs: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX               ',
-				re: '@hs',
-				sn: '@hs',
-				ta: '@ls',
-				ag: '@ls',
-				sh: '@ls',
+				hs: '@ls',
+				re: '@ls',
+				sn: '@ls',
+				ta: 'X X X X X X X X X X X X X X X X X X X X X X X X X               ',
+				ag: '@ta',
+				sh: '@ta',
 				volumeHack: { 0: .1, 16: .4, 32: .7, 48: 1  }
 			},
 			"Wulf Break": {
@@ -89,14 +89,14 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 				sh: '@ls'
 			},
 			'Progressive': {
-				ls: 'X   X   X   X   X X X X X X X X X X X X X X X X ',
+				ls: 'X   X   X   X   X X X X X X X X XXXXXXXXXXXXXXXX',
 				ms: '@ls',
-				hs: 'X   X   X   X   X X X X X X X X XXXXXXXXXXXXXXXX',
-				re: '@hs',
-				sn: '@hs',
-				ta: '@ls',
-				ag: '@ls',
-				sh: '@ls'
+				hs: '@ls',
+				re: '@ls',
+				sn: '@ls',
+				ta: 'X   X   X   X   X X X X X X X X X X X X X X X X ',
+				ag: '@ta',
+				sh: '@ta'
 			},
 			'4 Silence': {
 				ls: repeat(16, ' ')
@@ -187,7 +187,7 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 				re: '@ls',
 				sn: '@ls',
 				ta: '@ls',
-				ag: 'o o o o o o o o ',
+				ag: '@ls',
 				sh: '@ls'
 			}
 		},
@@ -201,7 +201,7 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 		patterns: {
 			Tune: {
 				loop: true,
-				ls: "X   0       0   X   0       0   X   0       0   X   0       X X",
+				ls: "X   0 XX    0   X   0 XX    0   X   0 XX    0   X   0 XX      X",
 				ms: '@ls',
 				hs: 'X   0 XX    0   X   0 XX    0   X   0 XX    0   X   0 XX X XX X ',
 				re: 'X  XX  X X XX X X  XX  X X XX X X  XX  X X XX X X  XX  X X XX X ',
@@ -211,9 +211,9 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 				sh: '................................................................'
 			},
 			'Break 2': {
-				ls: 'X X X X X X X X X   X   X   X   X X    X X      X X    X X      ',
+				ls: 'XXXXXXXXXXXXXXXXX   X   X   X   X X    X X      X X    X X      ',
 				ms: '@ls',
-				hs: 'XXXXXXXXXXXXXXXXX   X   X   X   X X    X X      X X    X X      ',
+				hs: '@ls',
 				re: 'XXXXXXXXXXXXXXXXX   X   X   X       X      XXXX     X      XXXX ',
 				sn: '@re',
 				ta: 'X X X X X X X X X   X   X   X       X      XXXX     X      XXXX ',
@@ -292,8 +292,8 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 		patterns: {
 			Tune: {
 				loop: true,
-				ls: '    X       X X ',
-				ms: 'X       X       ',
+				ls: '0   X   0   X X ',
+				ms: 'X   0   X   0   ',
 				hs: 'X     X X   XXXX',
 				re: '..XX..XX..XX..XX',
 				sn: 'X..X..X...X..X..',
