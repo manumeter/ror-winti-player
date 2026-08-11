@@ -1,33 +1,36 @@
 FROM node:lts-alpine AS build
 
-RUN apk add --update-cache git patch && \
+# chromium + ttf-dejavu + font-noto-emoji are used to generate the PDF tune sheets (the browser that
+# Puppeteer would download itself does not run on Alpine/musl)
+RUN apk add --update-cache git chromium ttf-dejavu font-noto-emoji && \
     mkdir /player && \
     git config --global advice.detachedHead false && \
     git config --global --add safe.directory /player
 
+ENV PUPPETEER_SKIP_DOWNLOAD=1
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+
 WORKDIR /player
 
-COPY ./ror-player.rev /tmp/ror-player.rev
+COPY ./roar-player.rev /tmp/roar-player.rev
 
-RUN git clone https://github.com/beatboxjs/ror-player.git . && \
-    git checkout $(cat /tmp/ror-player.rev)
+RUN git clone https://github.com/roar-player/roar-player.git . && \
+    git checkout $(cat /tmp/roar-player.rev)
 
 COPY ./patches /tmp/patches
 
-#    rm -rf /player/assets/tuneDescriptions/* /player/assets/audio/* /player/assets/i18n/* && \
 RUN git apply -v /tmp/patches/*.patch && \
-    npm install && \
-    for i in /tmp/patches/*.diff; do patch -p0 < $i; done
+    npm install
 
-#COPY ./descriptions /player/assets/tuneDescriptions
-#COPY ./audio /player/assets/audio
-#COPY ./i18n /player/assets/i18n
 COPY ./config.ts /player/src/config.ts
 COPY ./patterns.ts /player/src/defaultTunes.ts
+COPY ./www/app-512.png /player/logo.png
 
-#RUN ( cd /player/assets/audio; for i in *.mp3; do A=${i%.mp3}; mv "$i" "${A%_*}_$(echo -n ${A##*_} | xxd -p).mp3"; done ) && \
-#    npm run build
-RUN npm run build
+RUN npm run build && \
+    SHEETS_SOURCE=ror-winti.tuleb.net \
+    SHEETS_TITLE="RoR Winterthur" \
+    SHEETS_LOGO=/player/logo.png \
+    npm run build-sheets
 
 FROM nginx:stable-alpine AS production
 

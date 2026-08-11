@@ -8,9 +8,9 @@ Pushes to this repository will be built and published automatically
 
 https://ror-winti.tuleb.net
 
-The upstream code can be found at:
+The upstream code can be found at (a fork of RoR-Player, pinned by `roar-player.rev`):
 
-https://github.com/beatboxjs/ror-player.git
+https://github.com/roar-player/roar-player.git
 
 ## Build
 

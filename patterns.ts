@@ -162,7 +162,7 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 				sh: "@ls"
             }
 		},
-		exampleSong: ["Tune", "Tune", "Break 1", "Tune", "Tune", "Break 2", "Tune", "Tune"/*, "Call Break", "Tune", "Tune"*/]
+		exampleSong: [[ "Tune", "Tune", "Break 1", "Tune", "Tune", "Break 2", "Tune", "Tune"/*, "Call Break", "Tune", "Tune"*/ ]]
 	},
 	'Funk': {
 		categories: [ "common", "onesurdo", "easy" ],
@@ -191,7 +191,7 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 				sh: '@ls'
 			}
 		},
-		exampleSong: [ "Tune", "Tune", /*"Break 1", "Tune", "Tune",*/ "Break 2", "Tune", "Tune" ]
+		exampleSong: [[ "Tune", "Tune", /*"Break 1", "Tune", "Tune",*/ "Break 2", "Tune", "Tune" ]]
 	},
 	'Karla Shnikov': {
 		categories: [ "common", "onesurdo", "easy" ],
@@ -221,7 +221,7 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 				sh: '@ta'
 			}
 		},
-		exampleSong: [ "Tune", "Break 2", "Tune"/*, "Break 2 Inverted", "Tune"*/ ]
+		exampleSong: [[ "Tune", "Break 2", "Tune"/*, "Break 2 Inverted", "Tune"*/ ]]
 	},
 	'Ragga': {
 		categories: [ "common", "tricky" ],
@@ -283,7 +283,7 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 				sh: 'X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.'
 			}
 		},
-		exampleSong: [ "Tune", "Tune", "Break 2", "Tune", "Tune", "Break 3", "Tune", "Tune", "Kick Back 1", "Kick Back 1", "Tune", "Tune", "Zorro-Break", "Zorro-Break", "Tune", "Tune" ]
+		exampleSong: [[ "Tune", "Tune", "Break 2", "Tune", "Tune", "Break 3", "Tune", "Tune", "Kick Back 1", "Kick Back 1", "Tune", "Tune", "Zorro-Break", "Zorro-Break", "Tune", "Tune" ]]
 	},
 	'Samba Reggae': {
 		categories: [ "common", "medium", "cultural-appropriation" ],
@@ -322,7 +322,7 @@ const rawTunes: {[tuneName: string]: RawTune} = {
 				sh: '@ls'
 			},*/
 		},
-		exampleSong: [ "Tune", "Tune", "Tune", "Tune", "Call Break", "Tune", "Tune", "Tune", "Tune"/*, "Break 1", "Tune", "Tune", "Tune", "Tune", "Break 2", "Tune", "Tune", "Tune", "Tune", "Break 3", "Tune", "Tune", "Tune", "Tune", "SOS Break", "Tune", "Tune", "Tune", "Tune", "Knock On The Door Break", "Knock On The Door (Cut)", "Tune", "Tune", "Tune", "Tune", "Dancing Break", "Tune", "Tune", "Tune", "Tune"*/ ]
+		exampleSong: [[ "Tune", "Tune", "Tune", "Tune", "Call Break", "Tune", "Tune", "Tune", "Tune"/*, "Break 1", "Tune", "Tune", "Tune", "Tune", "Break 2", "Tune", "Tune", "Tune", "Tune", "Break 3", "Tune", "Tune", "Tune", "Tune", "SOS Break", "Tune", "Tune", "Tune", "Tune", "Knock On The Door Break", "Knock On The Door (Cut)", "Tune", "Tune", "Tune", "Tune", "Dancing Break", "Tune", "Tune", "Tune", "Tune"*/ ]]
 	}
 };
 
@@ -364,7 +364,7 @@ for(const i in rawTunes) {
 
 	defaultTunes[i] = normalizeTune(newTune);
 
-	const unknown = (defaultTunes[i].exampleSong || []).filter((patternName) => !defaultTunes[i].patterns[typeof patternName === 'string' ? patternName : patternName.patternName]);
+	const unknown = (defaultTunes[i].exampleSong || []).flat().filter((patternName) => !defaultTunes[i].patterns[typeof patternName === 'string' ? patternName : patternName.patternName]);
 	if(unknown.length > 0) {
 		// eslint-disable-next-line no-console
 		console.error(`Unknown breaks in example song for ${i}: ${unknown.join(", ")}`);
