@@ -59,5 +59,8 @@ RUN npm run build && \
 
 FROM nginx:stable-alpine AS production
 
+# Upstream's nginx config serves the generated PDFs with Cache-Control: no-cache, so that a new
+# deploy is visible immediately instead of browsers heuristically caching the old sheets
+COPY --from=build /player/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /player/dist /usr/share/nginx/html/
 COPY ./www /usr/share/nginx/html/
