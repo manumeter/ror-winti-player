@@ -6,6 +6,7 @@ RUN apk add --update-cache git chromium ttf-dejavu font-noto-emoji && \
     mkdir /player && \
     git config --global advice.detachedHead false && \
     git config --global --add safe.directory /player && \
+    git config --global --add safe.directory /upstream && \
     git config --global --add safe.directory /overlay
 
 ENV PUPPETEER_SKIP_DOWNLOAD=1
@@ -16,7 +17,12 @@ WORKDIR /player
 COPY ./roar-player.rev /tmp/roar-player.rev
 
 RUN git clone https://github.com/roar-player/roar-player.git . && \
-    git checkout $(cat /tmp/roar-player.rev)
+    git checkout $(cat /tmp/roar-player.rev) && \
+    # A pristine second checkout for the sheet generator to read the upstream per-tune versions from:
+    # /player itself is modified below (patterns.ts removed, our tunes merged in), which would count
+    # every tune folder as changed on the build date
+    git clone . /upstream && \
+    git -C /upstream checkout $(cat /tmp/roar-player.rev)
 
 COPY ./patches /tmp/patches
 
@@ -37,8 +43,8 @@ RUN rm /player/assets/tunes/*/patterns.ts
 COPY ./tunes /player/assets/tunes
 
 # A copy of this repo (git history + tunes) so that the sheet generator derives the per-tune versions in
-# the page footers from *our* change history of the tune folders; the upstream tunes directory is passed as
-# well so that changes to the reused upstream descriptions are also reflected. This repo must be a full
+# the page footers from *our* change history of the tune folders; the pristine upstream checkout is passed
+# as well so that changes to the reused upstream descriptions are also reflected. This repo must be a full
 # clone (a shallow fetch yields no per-tune versions), and uncommitted changes to a tune are versioned as
 # the build date.
 COPY ./.git /overlay/.git
@@ -48,7 +54,7 @@ RUN npm run build && \
     SHEETS_SOURCE=ror-winti.tuleb.net \
     SHEETS_TITLE="RoR Winterthur" \
     SHEETS_LOGO=/player/logo.png \
-    SHEETS_VERSION_TUNES=/overlay/tunes:/player/assets/tunes \
+    SHEETS_VERSION_TUNES=/overlay/tunes:/upstream/assets/tunes \
     npm run build-sheets
 
 FROM nginx:stable-alpine AS production
