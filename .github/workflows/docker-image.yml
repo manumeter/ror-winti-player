@@ -13,6 +13,10 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+        with:
+          # The full history is needed for the per-tune sheet versions in the PDF footers — the
+          # default shallow checkout has no history, and every PDF gets stamped with the build date
+          fetch-depth: 0
 
       - name: Log in to DockerHub
         uses: docker/login-action@v2
