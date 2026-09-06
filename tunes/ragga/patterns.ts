@@ -29,6 +29,17 @@ export const tune: RawTune = {
 			ag: '@re',
 			sh: '@re'
 		},
+		'Kick Back 2': {
+			loop: true,
+			ls: 'X  X X  X  X X  X  X X  X  X X  ',
+			ms: '@ls',
+			hs: '@ls',
+			re: '  X   X   X   X   X   X   X   X ',
+			sn: '@re',
+			ta: '@re',
+			ag: 'oaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa',
+			sh: '@re'
+		},
 		'Break 2': {
 			ls: 'X           XXX ',
 			ms: '@ls',
