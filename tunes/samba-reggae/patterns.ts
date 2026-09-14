@@ -26,7 +26,7 @@ export const tune: RawTune = {
 			ta: '          X X             X X             X X   X  X  X   X X   X  X  X   X X   X  X  X   X X   X  X  X   X X   ',
 			ag: '@ms',
 			sh: '@ms'
-		}/*,
+		},
 		'Break 1': {
 			ls: '                X X XX XX                       X  X  X X                                  XX                              XX                              XX                   ',
 			ms: '@ls',
@@ -36,7 +36,7 @@ export const tune: RawTune = {
 			ta: '@ls',
 			ag: '@ls',
 			sh: '@ls'
-		},*/
+		},
 	},
-	exampleSong: [[ "Tune", "Tune", "Tune", "Tune", "Call Break", "Tune", "Tune", "Tune", "Tune"/*, "Break 1", "Tune", "Tune", "Tune", "Tune", "Break 2", "Tune", "Tune", "Tune", "Tune", "Break 3", "Tune", "Tune", "Tune", "Tune", "SOS Break", "Tune", "Tune", "Tune", "Tune", "Knock On The Door Break", "Knock On The Door (Cut)", "Tune", "Tune", "Tune", "Tune", "Dancing Break", "Tune", "Tune", "Tune", "Tune"*/ ]]
+	exampleSong: [[ "Tune", "Tune", "Tune", "Tune", "Call Break", "Tune", "Tune", "Tune", "Tune", "Break 1", "Tune", "Tune", "Tune", "Tune", "Break 2", "Tune", "Tune", "Tune", "Tune", "Break 3", "Tune", "Tune", "Tune", "Tune", "SOS Break", "Tune", "Tune", "Tune", "Tune", "Knock On The Door Break", "Knock On The Door (Cut)", "Tune", "Tune", "Tune", "Tune", "Dancing Break", "Tune", "Tune", "Tune", "Tune" ]]
 };
