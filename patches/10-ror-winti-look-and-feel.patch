@@ -23,10 +23,3 @@ index 9248b4d..1d64e4c 100644
  $secondary: #fff;
  
  
-@@ -138,4 +139,4 @@ h3:not(.popover-header) {
- 
- /* .modal-footer button + button {
- 	margin-left: 0.25rem;
--} */
-\ No newline at end of file
-+} */
